@@ -7,7 +7,6 @@
    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Muli:wght@300;400;500;600&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js"></script>
 </head>
 <body>
    <!-- Video Background -->
@@ -4144,45 +4143,44 @@ document.addEventListener('keydown', e => {
         closeMobileMenu();
     }
 
-    // Initialize Fancybox Gallery
-if (typeof Fancybox !== 'undefined') {
-    Fancybox.bind("[data-fancybox='gallery']", {
-        infinite: true,
-        keyboard: {
-            Escape: "close",
-            Delete: "close",
-            Backspace: "close",
-            PageUp: "next",
-            PageDown: "prev",
-            ArrowRight: "next",
-            ArrowLeft: "prev"
-        },
-        Thumbs: {
-            showOnStart: false
-        },
-        Toolbar: {
-            display: {
-                left: ["infobar"],
-                middle: [],
-                right: ["slideshow", "thumbs", "close"]
+// Replace the existing Fancybox init with this:
+// Initialize Fancybox - moved outside the keydown event listener
+function initFancybox() {
+    if (typeof Fancybox !== 'undefined') {
+        Fancybox.bind("[data-fancybox='gallery']", {
+            infinite: true,
+            keyboard: {
+                Escape: "close",
+                Delete: "close",
+                Backspace: "close",
+                PageUp: "next",
+                PageDown: "prev",
+                ArrowRight: "next",
+                ArrowLeft: "prev"
+            },
+            Thumbs: { showOnStart: false },
+            Toolbar: {
+                display: {
+                    left: ["infobar"],
+                    middle: [],
+                    right: ["slideshow", "thumbs", "close"]
+                }
             }
-        },
-        Images: {
-            zoom: true,
-            protected: true
-        },
-        Touch: {
-            vertical: true,
-            momentum: true
-        }
-    });
+        });
+    } else {
+        console.error('Fancybox not loaded');
+    }
 }
 
+// Call it after a small delay to ensure everything is loaded
+setTimeout(initFancybox, 100);
 });
 
             // Initialize
             handleScroll();
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js"></script>
+
 </body>
 </html>
