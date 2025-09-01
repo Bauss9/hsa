@@ -7,6 +7,8 @@
    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Muli:wght@300;400;500;600&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.css" />
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js"></script>
+
 </head>
 <body>
    <!-- Video Background -->
@@ -110,7 +112,7 @@
 <div class="left-gallery">
     <div class="gallery-grid">
         <div class="gallery-item">
-            <a href="/bigsizes/2.jpg" data-fancybox="gallery" data-caption="">
+            <a href="./bigsizes/2.jpg" data-fancybox="gallery" data-caption="">
                 <img src="/assets/2.jpg" alt="Luxury Interior">
                 <div class="gallery-overlay">
                     <i class="fas fa-expand"></i>
@@ -119,7 +121,7 @@
             </a>
         </div>
         <div class="gallery-item">
-            <a href="/bigsizes/3.jpg" data-fancybox="gallery" data-caption="">
+            <a href="./bigsizes/3.jpg" data-fancybox="gallery" data-caption="">
                 <img src="/assets/3.jpg" alt="Ocean View">
                 <div class="gallery-overlay">
                     <i class="fas fa-expand"></i>
@@ -128,7 +130,7 @@
             </a>
         </div>
         <div class="gallery-item">
-            <a href="/bigsizes/4.jpg" data-fancybox="gallery" data-caption="">
+            <a href="./bigsizes/4.jpg" data-fancybox="gallery" data-caption="">
                 <img src="/assets/4.jpg" alt="Modern Kitchen">
                 <div class="gallery-overlay">
                     <i class="fas fa-expand"></i>
@@ -137,7 +139,7 @@
             </a>
         </div>
         <div class="gallery-item">
-            <a href="/bigsizes/5.jpg" data-fancybox="gallery" data-caption="">
+            <a href="./bigsizes/5.jpg" data-fancybox="gallery" data-caption="">
                 <img src="/assets/5.jpg" alt="Bedroom Suite">
                 <div class="gallery-overlay">
                     <i class="fas fa-expand"></i>
@@ -146,7 +148,7 @@
             </a>
         </div>
         <div class="gallery-item">
-            <a href="/bigsizes/6.jpg" data-fancybox="gallery" data-caption="">
+            <a href="./bigsizes/6.jpg" data-fancybox="gallery" data-caption="">
                 <img src="/assets/6.jpg" alt="Balcony Pool">
                 <div class="gallery-overlay">
                     <i class="fas fa-expand"></i>
@@ -155,7 +157,7 @@
             </a>
         </div>
         <div class="gallery-item">
-            <a href="/bigsizes/7.jpg" data-fancybox="gallery" data-caption="">
+            <a href="./bigsizes/7.jpg" data-fancybox="gallery" data-caption="">
                 <img src="/assets/7.jpg" alt="Dubai Skyline">
                 <div class="gallery-overlay">
                     <i class="fas fa-expand"></i>
@@ -645,7 +647,7 @@
            
            <!-- Mobile Image Section -->
            <div class="booking-hero-mobile">
-               <img src="/assets/https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop" alt="Luxury Apartment">
+               <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop" alt="Luxury Apartment">
                <div class="booking-hero-overlay">
                    <h2>Reserve Your Luxury Residence</h2>
                    <p>Experience Dubai's finest living</p>
@@ -656,7 +658,7 @@
                <!-- Desktop Layout -->
                <div class="booking-desktop-layout">
                    <div class="booking-image-desktop">
-                       <img src="/assets/https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=800&fit=crop" alt="Luxury Apartment">
+                       <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=800&fit=crop" alt="Luxury Apartment">
                    </div>
                    
                    <div class="booking-form-content">
@@ -4172,9 +4174,38 @@ setTimeout(initFancybox, 100);
             // Initialize
             handleScroll();
         });
+
+        // Replace with this:
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Fancybox !== 'undefined') {
+        Fancybox.bind("[data-fancybox='gallery']", {
+            infinite: true,
+            Thumbs: { showOnStart: false }
+        });
+    }
+});
+
+        console.log('Script loaded');
+
+window.addEventListener('load', function() {
+    console.log('Window loaded');
+    console.log('Fancybox type:', typeof Fancybox);
+    
+    // Force check gallery links
+    const galleryLinks = document.querySelectorAll('[data-fancybox="gallery"]');
+    console.log('Found gallery links:', galleryLinks.length);
+    
+    galleryLinks.forEach((link, index) => {
+        console.log('Link ' + index + ':', link.href);
+    });
+});
+
+// Also add immediate check
+setTimeout(() => {
+    console.log('Timeout check - Fancybox:', typeof Fancybox);
+}, 2000);
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js"></script>
 
 </body>
 </html>
