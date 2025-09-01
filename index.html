@@ -6,6 +6,8 @@
    <title>Luxury Dubai Apartment | Premium Living</title>
    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Muli:wght@300;400;500;600&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js"></script>
 </head>
 <body>
    <!-- Video Background -->
@@ -26,33 +28,58 @@
                <span class="dropdown-arrow">▼</span>
            </button>
            <div class="dropdown-menu">
-               <a href="#" class="dropdown-item" data-lang="en">English</a>
-               <a href="#" class="dropdown-item" data-lang="ar">العربية</a>
-               <a href="#" class="dropdown-item" data-lang="de">Deutsch</a>
-               <a href="#" class="dropdown-item" data-lang="it">Italiano</a>
-               <a href="#" class="dropdown-item" data-lang="fr">Français</a>
-               <a href="#" class="dropdown-item" data-lang="ru">Русский</a>
+               <a href="" class="dropdown-item" data-lang="en">English</a>
+               <a href="/ar" class="dropdown-item" data-lang="ar">العربية</a>
+               <a href="/de" class="dropdown-item" data-lang="de">Deutsch</a>
+               <a href="/it" class="dropdown-item" data-lang="it">Italiano</a>
+               <a href="/fr" class="dropdown-item" data-lang="fr">Français</a>
+               <a href="/rs" class="dropdown-item" data-lang="ru">Русский</a>
            </div>
        </div>
 
-       <!-- Logo -->
-       <div class="logo">
-           <img src="cropped-Icon-BWG-01.webp" alt="Logo" class="logo-img">
-       </div>
+       <!-- Navigation Bar -->
+       <nav class="nav-bar">
+           <a href="#about" class="nav-link">ABOUT</a>
+           <a href="#project" class="nav-link">THE PROJECT</a>
+           <a href="#apartment" class="nav-link">THE APARTMENT</a>
+           <a href="#buy" class="nav-link">BUY</a>
+       </nav>
+
+       <!-- Mobile Burger Menu -->
+<button class="mobile-menu-toggle" id="mobileMenuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
 
        <!-- Reserve Button -->
        <button class="reserve-btn" id="reserveBtn">RESERVE</button>
    </header>
 
+   <!-- Mobile Navigation Menu -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay">
+    <div class="mobile-nav-menu">
+        <button class="mobile-nav-close" id="mobileNavClose">×</button>
+        <nav class="mobile-nav-links">
+            <a href="#about" class="mobile-nav-link">ABOUT</a>
+            <a href="#project" class="mobile-nav-link">THE PROJECT</a>
+            <a href="#apartment" class="mobile-nav-link">THE APARTMENT</a>
+            <a href="#reserve" class="mobile-nav-link">RESERVE</a>
+            <a href="#buy" class="mobile-nav-link">BUY</a>
+            <button class="mobile-reserve-btn" id="mobileReserveBtn">RESERVE NOW</button>
+        </nav>
+    </div>
+</div>
+
    <!-- Main Content -->
-   <main class="main-content">
+   <main class="main-content" id="about">
        <div class="hero-title">
            <h1 class="title-main">Luxury Redefined</h1>
            <p class="title-description">Experience the pinnacle of Dubai living in this exclusive residence</p>
        </div>
    </main>
 
-   <section class="project-section">
+   <section class="project-section" id="project">
        <div class="container">
            <h2 class="section-title">The Dawn of Refined Living</h2>
            <div class="content-wrapper">
@@ -73,7 +100,7 @@
 
    <section class="image-section">
        <div class="image-container">
-           <img src="68959e452c7c6IMTIAZ-BWGrand-Brochure_page-0010.jpg" alt="Luxury Apartment" class="scroll-image">
+           <img src="/assets/68959e452c7c6IMTIAZ-BWGrand-Brochure_page-0010.jpg" alt="Luxury Apartment" class="scroll-image">
        </div>
    </section>
 
@@ -81,28 +108,64 @@
    <section class="project-section-static">
        <div class="project-container">
            <!-- Left Side - Gallery Grid -->
-           <div class="left-gallery">
-               <div class="gallery-grid">
-                   <div class="gallery-item">
-                       <img src="2.jpg" alt="Luxury Interior">
-                   </div>
-                   <div class="gallery-item">
-                       <img src="3.jpg" alt="Ocean View">
-                   </div>
-                   <div class="gallery-item">
-                       <img src="4.jpg" alt="Modern Kitchen">
-                   </div>
-                   <div class="gallery-item">
-                       <img src="5.jpg" alt="Bedroom Suite">
-                   </div>
-                   <div class="gallery-item">
-                       <img src="6.jpg" alt="Balcony Pool">
-                   </div>
-                   <div class="gallery-item">
-                       <img src="7.jpg" alt="Dubai Skyline">
-                   </div>
-               </div>
-           </div>
+<div class="left-gallery">
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <a href="/bigsizes/2.jpg" data-fancybox="gallery" data-caption="">
+                <img src="/assets/2.jpg" alt="Luxury Interior">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                    <span>View Gallery</span>
+                </div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="/bigsizes/3.jpg" data-fancybox="gallery" data-caption="">
+                <img src="/assets/3.jpg" alt="Ocean View">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                    <span>View Gallery</span>
+                </div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="/bigsizes/4.jpg" data-fancybox="gallery" data-caption="">
+                <img src="/assets/4.jpg" alt="Modern Kitchen">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                    <span>View Gallery</span>
+                </div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="/bigsizes/5.jpg" data-fancybox="gallery" data-caption="">
+                <img src="/assets/5.jpg" alt="Bedroom Suite">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                    <span>View Gallery</span>
+                </div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="/bigsizes/6.jpg" data-fancybox="gallery" data-caption="">
+                <img src="/assets/6.jpg" alt="Balcony Pool">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                    <span>View Gallery</span>
+                </div>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="/bigsizes/7.jpg" data-fancybox="gallery" data-caption="">
+                <img src="/assets/7.jpg" alt="Dubai Skyline">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                    <span>View Gallery</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 
            <!-- Right Side - Content -->
            <div class="right-content">
@@ -147,11 +210,127 @@
        </div>
    </section>
 
-   <section class="apartment-section">
+   <!-- Amenities Section -->
+<section class="amenities-section">
+    <div class="amenities-container">
+        <div class="amenities-header">
+            <h2 class="amenities-title">World-Class Amenities</h2>
+            <p class="amenities-subtitle">Experience resort-style living with exclusive facilities designed for luxury and comfort</p>
+        </div>
+        
+        <div class="amenities-grid">
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="amenity-image">
+                    <img src="/amenities/poolsidelounge.jpg" alt="Pool Side Lounge">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-cocktail"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">POOL SIDE LOUNGE</h3>
+                    <p class="amenity-description">Sophisticated outdoor lounge area with premium seating and refreshment service</p>
+                </div>
+            </div>
+
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="amenity-image">
+                    <img src="/amenities/kidspool.jpg" alt="Kids Pool">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-child"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">KIDS POOL</h3>
+                    <p class="amenity-description">Safe and fun dedicated swimming area designed specifically for children</p>
+                </div>
+            </div>
+
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="amenity-image">
+                    <img src="/amenities/kidsplay.jpg" alt="Kids Play Area">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-playground"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">KIDS PLAY AREA</h3>
+                    <p class="amenity-description">Interactive playground with modern equipment in a secure environment</p>
+                </div>
+            </div>
+
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="amenity-image">
+                    <img src="/amenities/bbq.jpg" alt="BBQ Area">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">BBQ AREA</h3>
+                    <p class="amenity-description">Professional outdoor grilling stations with scenic dining spaces</p>
+                </div>
+            </div>
+
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="amenity-image">
+                    <img src="/amenities/peaceful.png" alt="Peaceful Perch">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">PEACEFUL PERCH</h3>
+                    <p class="amenity-description">Tranquil meditation and relaxation spaces surrounded by lush landscaping</p>
+                </div>
+            </div>
+
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="amenity-image">
+                    <img src="/amenities/swimmingpool.jpg" alt="Swimming Pool">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-swimmer"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">SWIMMING POOL</h3>
+                    <p class="amenity-description">Infinity pool with panoramic views of Dubai's stunning skyline</p>
+                </div>
+            </div>
+
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="700">
+                <div class="amenity-image">
+                    <img src="/amenities/serena.jpg" alt="Serene Cabanas">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">SERENE CABANAS</h3>
+                    <p class="amenity-description">Private cabanas offering ultimate comfort and exclusivity by the water</p>
+                </div>
+            </div>
+
+            <div class="amenity-card" data-aos="fade-up" data-aos-delay="800">
+                <div class="amenity-image">
+                    <img src="/amenities/gym.jpg" alt="Gym">
+                    <div class="amenity-overlay">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                </div>
+                <div class="amenity-content">
+                    <h3 class="amenity-name">GYM</h3>
+                    <p class="amenity-description">State-of-the-art fitness center with premium equipment and personal training</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+   <section class="apartment-section" id="apartment">
        <div class="apartment-container">
            <!-- Left Image -->
            <div class="apartment-image-left">
-               <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=800&fit=crop" alt="Apartment Interior">
+               <img src="/assets/IMTIAZ-BWGrand-Exterior-1-scaled.jpg" alt="Apartment Interior">
            </div>
 
            <!-- Middle Content -->
@@ -198,13 +377,13 @@
 
            <!-- Right Image -->
            <div class="apartment-image-right">
-               <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=800&fit=crop" alt="Apartment View">
+               <img src="/assets/IMTIAZ-BWGrand-Exterior-3-scaled.jpg" alt="Apartment View">
            </div>
        </div>
    </section>
 
    <!-- Booking Section -->
-   <section class="booking-section">
+   <section class="booking-section" id="reserve">
        <div class="booking-container">
            <h2 class="booking-title">Reserve Your Exclusive Dubai Experience</h2>
            <p class="booking-subtitle">Secure your viewing appointment and begin your luxury living journey</p>
@@ -212,11 +391,11 @@
            <div class="booking-form-inline">
                <div class="form-field">
                    <label>Check-in Date</label>
-                   <input type="date" placeholder="Select date">
+                   <input type="date" min="2026-11-01" placeholder="Select date">
                </div>
                <div class="form-field">
                    <label>Check-out Date</label>
-                   <input type="date" placeholder="Select date">
+                   <input type="date" min="2026-11-01" placeholder="Select date">
                </div>
                <div class="form-field">
                    <label>Guests</label>
@@ -225,14 +404,6 @@
                        <option>2 Guests</option>
                        <option>3 Guests</option>
                        <option>4+ Guests</option>
-                   </select>
-               </div>
-               <div class="form-field">
-                   <label>Budget Range</label>
-                   <select>
-                       <option>$1M - $2M</option>
-                       <option>$2M - $5M</option>
-                       <option>$5M+</option>
                    </select>
                </div>
                <button class="booking-reserve-btn" id="bookingReserveBtn">
@@ -244,7 +415,7 @@
    </section>
 
    <!-- Exclusive Bidding Section -->
-   <section class="exclusive-section">
+   <section class="exclusive-section" id="buy">
        <div class="exclusive-container">
            <div class="section-header">
                <h1 class="main-title">Make It Yours</h1>
@@ -261,7 +432,7 @@
            
            <div class="bid-content-wrapper">
                <div class="bid-image">
-                   <img src="Screenshot 2025-08-28 at 04.18.06.png" alt="Luxury Apartment Interior">
+                   <img src="/assets/Screenshot 2025-08-28 at 04.18.06.png" alt="Luxury Apartment Interior">
                    <div class="image-overlay">
                        <div class="overlay-text">
                            <span class="overlay-label">Your Future Home</span>
@@ -393,7 +564,7 @@
         <!-- Top Section -->
         <div class="footer-top">
             <div class="footer-brand">
-                <img src="cropped-Icon-BWG-01.webp" alt="BWG Logo" class="footer-logo">
+                <img src="/assets/cropped-Icon-BWG-01.webp" alt="BWG Logo" class="footer-logo">
                 <h3 class="footer-brand-title">Beach Walk Grand</h3>
                 <p class="footer-brand-text">Redefining luxury living on Dubai Islands with unparalleled beachfront residences and world-class amenities.</p>
             </div>
@@ -475,7 +646,7 @@
            
            <!-- Mobile Image Section -->
            <div class="booking-hero-mobile">
-               <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop" alt="Luxury Apartment">
+               <img src="/assets/https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop" alt="Luxury Apartment">
                <div class="booking-hero-overlay">
                    <h2>Reserve Your Luxury Residence</h2>
                    <p>Experience Dubai's finest living</p>
@@ -486,7 +657,7 @@
                <!-- Desktop Layout -->
                <div class="booking-desktop-layout">
                    <div class="booking-image-desktop">
-                       <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=800&fit=crop" alt="Luxury Apartment">
+                       <img src="/assets/https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=800&fit=crop" alt="Luxury Apartment">
                    </div>
                    
                    <div class="booking-form-content">
@@ -515,11 +686,11 @@
                                <div class="form-row">
                                    <div class="form-group">
                                        <label for="checkin">Check-in Date</label>
-                                       <input type="date" id="checkin" name="checkin" required>
+                                       <input type="date" min="2026-11-01" id="checkin" name="checkin" required>
                                    </div>
                                    <div class="form-group">
                                        <label for="checkout">Check-out Date</label>
-                                       <input type="date" id="checkout" name="checkout" required>
+                                       <input type="date" min="2026-11-01" id="checkout" name="checkout" required>
                                    </div>
                                </div>
                                
@@ -576,7 +747,7 @@
            </div>
            
            <div class="brochure-preview">
-               <img src="68959e452c7c6IMTIAZ-BWGrand-Brochure_page-0010.jpg" alt="Brochure Preview">
+               <img src="/assets/68959e452c7c6IMTIAZ-BWGrand-Brochure_page-0010.jpg" alt="Brochure Preview">
                <div class="preview-overlay">
                    <i class="fas fa-eye"></i>
                    <span>Preview</span>
@@ -690,26 +861,185 @@
            );
            mix-blend-mode: multiply;
        }
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    background: transparent;
+    z-index: 2000;
+    transition: all 0.3s ease;
+}
+       /* Navigation Bar Styles */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
 
-       /* Header */
-       .header {
-           position: fixed;
-           top: 0;
-           left: 0;
-           width: 100%;
-           height: 150px;
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-           padding: 0 3rem;
-           background: transparent;
-           z-index: 2000;
-           transition: all 0.3s ease;
-       }
+.nav-link {
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #e3d0ae;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: #e3d0ae;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .nav-bar {
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-bar {
+        display: none;
+    }
+}
+
+/* Enhanced Gallery Styles */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.gallery-item a {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.gallery-overlay span {
+    font-family: 'Muli', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Custom Fancybox Styling */
+.fancybox__container {
+    --fancybox-bg: rgba(0, 0, 0, 0.95);
+    --fancybox-accent-color: #e3d0ae;
+}
+
+.fancybox__caption {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    font-family: 'Muli', sans-serif;
+    font-size: 16px;
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+}
+
+.fancybox__button {
+    background: rgba(227, 208, 174, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.fancybox__button:hover {
+    background: rgba(227, 208, 174, 0.3);
+    transform: scale(1.1);
+}
+
+/* Mobile Gallery Adjustments */
+@media (max-width: 768px) {
+    .gallery-overlay i {
+        font-size: 1.5rem;
+    }
+    
+    .gallery-overlay span {
+        font-size: 10px;
+    }
+    
+    .fancybox__caption {
+        font-size: 14px;
+        padding: 1.5rem 1rem 0.5rem;
+    }
+}
 
        .header.scrolled {
            height: 50px;
            opacity: 0;
+           pointer-events: none;
        }
 
        .header.scrolled .logo-img {
@@ -768,7 +1098,7 @@
            visibility: hidden;
            transform: translateY(-10px);
            transition: all 0.3s ease;
-           z-index: 1001;
+           z-index: 2500;
        }
 
        .language-dropdown:hover .dropdown-menu {
@@ -863,6 +1193,386 @@
            position: relative;
            z-index: 10;
        }
+
+       /* Mobile Burger Menu */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Navigation Overlay */
+.mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9000;
+    transition: right 0.4s ease;
+}
+
+.mobile-nav-overlay.active {
+    right: 0;
+}
+
+.mobile-nav-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    padding: 2rem;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-nav-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-nav-close:hover {
+    background: #e3d0ae;
+    transform: rotate(90deg);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 5rem;
+}
+
+.mobile-nav-link {
+    font-family: 'Muli', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.mobile-nav-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 2px;
+    background: #e3d0ae;
+    transition: width 0.3s ease;
+    transform: translateY(-50%);
+}
+
+/* Amenities Section */
+.amenities-section {
+    width: 100%;
+    background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+    padding: 120px 0;
+    position: relative;
+    z-index: 100;
+}
+
+.amenities-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.amenities-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.amenities-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.amenities-title::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e3d0ae, transparent);
+}
+
+.amenities-subtitle {
+    font-family: 'Muli', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #666;
+    margin-top: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.amenity-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.amenity-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.amenity-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.amenity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.amenity-card:hover .amenity-image img {
+    transform: scale(1.1);
+}
+
+.amenity-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(227, 208, 174, 0.9) 0%, rgba(212, 193, 154, 0.9) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.amenity-card:hover .amenity-overlay {
+    opacity: 1;
+}
+
+.amenity-overlay i {
+    font-size: 3rem;
+    color: white;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.amenity-card:hover .amenity-overlay i {
+    transform: scale(1);
+}
+
+.amenity-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+.amenity-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.amenity-description {
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .amenities-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .amenities-section {
+        padding: 80px 0;
+    }
+    
+    .amenities-title {
+        font-size: 2.5rem;
+    }
+    
+    .amenities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .amenity-image {
+        height: 150px;
+    }
+    
+    .amenity-content {
+        padding: 1.5rem;
+    }
+    
+    .amenity-name {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .amenities-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .amenity-image {
+        height: 180px;
+    }
+}
+
+/* Hover Animation Enhancement */
+.amenity-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(227, 208, 174, 0.1), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.amenity-card:hover::before {
+    left: 100%;
+}
+
+.mobile-nav-link:hover::before {
+    width: 40px;
+}
+
+.mobile-nav-link:hover {
+    color: #e3d0ae;
+    padding-left: 50px;
+}
+
+.mobile-reserve-btn {
+    background: linear-gradient(135deg, #e3d0ae 0%, #d4c19a 100%);
+    border: none;
+    color: #1a1a1a;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.mobile-reserve-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(227, 208, 174, 0.4);
+}
+
+/* Mobile Responsive Updates */
+@media (max-width: 768px) {
+    .nav-bar {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .reserve-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-nav-menu {
+        width: 100%;
+    }
+    
+    .header {
+        padding: 0 1.5rem;
+    }
+}
 
        .hero-title {
            color: white;
@@ -1145,7 +1855,7 @@
            left: 0;
            width: 100%;
            height: 100%;
-           background: url('swimm-frau.jpg') center/cover;
+           background: url('/assets/swimm-frau.jpg') center/cover;
        }
 
        .bg-image-static::after {
@@ -2762,7 +3472,7 @@
             .left-gallery,
             .right-content {
                 width: 100%;
-                height: 60vh;
+                height: 600px;
             }
 
             .left-gallery {
@@ -3087,18 +3797,15 @@
                 imageSection: document.querySelector('.image-section')
             };
 
+            DOM.navLinks = document.querySelectorAll('.nav-link');
+
+
             const state = {
                 currentScrollPosition: 0,
                 isAnimating: false
             };
 
-            // Language dropdown
-            DOM.dropdownItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    DOM.languageText.textContent = this.getAttribute('data-lang').toUpperCase();
-                });
-            });
+
 
             // Simple scroll handler
             function handleScroll() {
@@ -3120,7 +3827,43 @@
                         DOM.imageContainer.style.width = width + '%';
                     }
                 }
+
+                updateActiveNavLink();
+
             }
+
+            function updateActiveNavLink() {
+    const sections = ['about', 'project', 'apartment', 'reserve', 'buy'];
+    const scrollPosition = window.scrollY + 200;
+    
+    let activeSection = 'about';
+    
+    sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section && scrollPosition >= section.offsetTop) {
+            activeSection = sectionId;
+        }
+    });
+    
+    DOM.navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${activeSection}`) {
+            link.classList.add('active');
+        }
+    });
+
+    // Add navigation click handlers after the existing event listeners
+DOM.navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+}
 
             // Vacuum animation
             function createVacuumEffect() {
@@ -3239,6 +3982,31 @@
             DOM.reserveBtn2?.addEventListener('click', createVacuumEffect);
             DOM.bookingReserveBtn?.addEventListener('click', createVacuumEffect);
 
+            // Add to DOM object
+DOM.mobileMenuToggle = document.getElementById('mobileMenuToggle');
+DOM.mobileNavOverlay = document.getElementById('mobileNavOverlay');
+DOM.mobileNavClose = document.getElementById('mobileNavClose');
+DOM.mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+DOM.mobileReserveBtn = document.getElementById('mobileReserveBtn');
+
+// Add these functions
+function openMobileMenu() {
+    DOM.mobileNavOverlay.classList.add('active');
+    DOM.mobileMenuToggle.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+    DOM.mobileNavOverlay.classList.remove('active');
+    DOM.mobileMenuToggle.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Add these event listeners
+DOM.mobileMenuToggle?.addEventListener('click', openMobileMenu);
+DOM.mobileNavClose?.addEventListener('click', closeMobileMenu);
+
+
             // Brochure buttons
             DOM.brochureBtn?.addEventListener('click', openBrochureSidebar);
             DOM.brochureBtn2?.addEventListener('click', openBrochureSidebar);
@@ -3336,6 +4104,73 @@
                     alert(`This would open the ${page} page`);
                 });
             });
+
+
+// Mobile nav links
+DOM.mobileNavLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            closeMobileMenu();
+        }
+    });
+});
+
+// Mobile reserve button
+DOM.mobileReserveBtn?.addEventListener('click', function() {
+    closeMobileMenu();
+    createVacuumEffect();
+});
+
+// Close mobile menu when clicking outside
+DOM.mobileNavOverlay?.addEventListener('click', function(e) {
+    if (e.target === this) closeMobileMenu();
+});
+
+// Close on escape key
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && DOM.mobileNavOverlay.classList.contains('active')) {
+        closeMobileMenu();
+    }
+
+    // Initialize Fancybox Gallery
+if (typeof Fancybox !== 'undefined') {
+    Fancybox.bind("[data-fancybox='gallery']", {
+        infinite: true,
+        keyboard: {
+            Escape: "close",
+            Delete: "close",
+            Backspace: "close",
+            PageUp: "next",
+            PageDown: "prev",
+            ArrowRight: "next",
+            ArrowLeft: "prev"
+        },
+        Thumbs: {
+            showOnStart: false
+        },
+        Toolbar: {
+            display: {
+                left: ["infobar"],
+                middle: [],
+                right: ["slideshow", "thumbs", "close"]
+            }
+        },
+        Images: {
+            zoom: true,
+            protected: true
+        },
+        Touch: {
+            vertical: true,
+            momentum: true
+        }
+    });
+}
+
+});
 
             // Initialize
             handleScroll();
