@@ -30,34 +30,43 @@
             };
 
 
+let lastScrollY = 0;
+let ticking = false;
 
-            // Simple scroll handler
-            function handleScroll() {
-                const scrollY = window.scrollY;
-                const windowHeight = window.innerHeight;
+function handleScroll() {
+    const scrollY = window.scrollY;
+    const header = DOM.header;
+    
+if (scrollY > 100) {
+    header.classList.add('sticky');
+    
+    // Only hide if we're actually scrolling down AND we have a previous scroll position
+    if (scrollY > lastScrollY && scrollY > 200 && lastScrollY > 0) {
+        header.classList.add('hidden');
+    } else {
+        header.classList.remove('hidden');
+    }
+} else {
+    header.classList.remove('sticky', 'hidden');
+}
 
-                // Header animation
-                DOM.header.classList.toggle('scrolled', scrollY > 50);
-                
-                // Hero fade
-                DOM.heroTitle.classList.toggle('fade-out', scrollY > windowHeight * 0.4);
-                
-                // Image width animation
-                if (DOM.imageSection) {
-                    const imageSectionTop = DOM.imageSection.offsetTop;
-                    if (scrollY >= imageSectionTop - windowHeight && scrollY <= imageSectionTop + windowHeight) {
-                        const progress = Math.min(Math.max((scrollY - (imageSectionTop - windowHeight)) / windowHeight, 0), 1);
-                        const width = 70 + (progress * 30);
-                        DOM.imageContainer.style.width = width + '%';
-                    }
-                }
-
-                    updateScrollToTopButton();
-
-
-                updateActiveNavLink();
-
-            }
+lastScrollY = scrollY;
+    
+    // Keep your existing hero fade and image animations
+    DOM.heroTitle.classList.toggle('fade-out', scrollY > window.innerHeight * 0.4);
+    
+    if (DOM.imageSection) {
+        const imageSectionTop = DOM.imageSection.offsetTop;
+        if (scrollY >= imageSectionTop - window.innerHeight && scrollY <= imageSectionTop + window.innerHeight) {
+            const progress = Math.min(Math.max((scrollY - (imageSectionTop - window.innerHeight)) / window.innerHeight, 0), 1);
+            const width = 70 + (progress * 30);
+            DOM.imageContainer.style.width = width + '%';
+        }
+    }
+    
+    updateScrollToTopButton();
+    updateActiveNavLink();
+}
 
             function updateActiveNavLink() {
     const sections = ['about', 'project', 'apartment', 'reserve', 'buy'];

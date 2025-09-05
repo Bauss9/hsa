@@ -241,11 +241,11 @@
     }
 }
 
-       .header.scrolled {
+       /* .header.scrolled {
            height: 50px;
            opacity: 0;
            pointer-events: none;
-       }
+       } */
 
        .header.scrolled .logo-img {
            height: 60px;
@@ -607,6 +607,35 @@
 
 .amenity-card:hover .amenity-image img {
     transform: scale(1.1);
+}
+
+.header.sticky {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    transform: translateY(0);
+}
+
+/* .header.hidden {
+    transform: translateY(-100%);
+} */
+
+.header.sticky .nav-link {
+    color: #1a1a1a;
+}
+
+.header.sticky .dropdown-toggle {
+    color: #1a1a1a;
+}
+
+.header.sticky .mobile-menu-toggle span {
+    background: #1a1a1a;
+}
+
+.header.sticky .reserve-btn {
+    background: #1a1a1a;
+    color: white;
 }
 
 .amenity-overlay {
