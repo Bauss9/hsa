@@ -11,6 +11,38 @@
    <link rel="stylesheet" href="/styles.css">
        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js"></script>
 
+       <script>
+        (function() {
+            const currentPath = window.location.pathname;
+            const isLanguagePage = /^\/(ar|de|it|fr|rs)/.test(currentPath);
+            
+            if (isLanguagePage) {
+                return;
+            }
+            
+            const hasBeenRedirected = sessionStorage.getItem('languageRedirected');
+            if (hasBeenRedirected) {
+                return;
+            }
+            
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.toLowerCase().split('-')[0];
+            
+            const languageMap = {
+                'de': '/de',
+                'it': '/it', 
+                'ru': '/rs',
+                'fr': '/fr',
+                'ar': '/ar'
+            };
+            
+            if (languageMap[langCode]) {
+                sessionStorage.setItem('languageRedirected', 'true');
+                window.location.href = languageMap[langCode];
+            }
+        })();
+    </script>
+    
 </head>
 <body>
    <!-- Video Background -->
@@ -31,7 +63,7 @@
                <span class="dropdown-arrow">▼</span>
            </button>
            <div class="dropdown-menu">
-               <a href="" class="dropdown-item" data-lang="en">English</a>
+               <a href="/" class="dropdown-item" data-lang="en">English</a>
                <a href="/ar" class="dropdown-item" data-lang="ar">العربية</a>
                <a href="/de" class="dropdown-item" data-lang="de">Deutsch</a>
                <a href="/it" class="dropdown-item" data-lang="it">Italiano</a>
