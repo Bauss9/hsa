@@ -29,6 +29,72 @@
                 isAnimating: false
             };
 
+            // Language detection and initialization
+            const availableLanguages = {
+                'rs': 'RS',
+                'sr': 'RS', // Serbian alternative code
+                'it': 'IT',
+                'fr': 'FR',
+                'de': 'DE',
+                'ar': 'AR',
+                'en': 'EN'
+            };
+
+            function detectAndSetLanguage() {
+                // Check if language was already set by user
+                const savedLang = localStorage.getItem('selectedLanguage');
+                if (savedLang) {
+                    // Apply saved language
+                    if (DOM.languageText) {
+                        DOM.languageText.textContent = savedLang;
+                    }
+                    return;
+                }
+
+                // Get browser language
+                const userLang = navigator.language || navigator.userLanguage;
+                const langCode = userLang.split('-')[0].toLowerCase(); // 'en-US' -> 'en'
+
+                console.log('Detected browser language:', userLang, '-> Code:', langCode);
+
+                // Check if we support this language
+                const detectedLang = availableLanguages[langCode];
+
+                if (detectedLang) {
+                    setLanguage(detectedLang);
+                    console.log('Language auto-set to:', detectedLang);
+                } else {
+                    setLanguage('EN'); // Default to English
+                    console.log('Language defaulted to: EN (unsupported language:', langCode, ')');
+                }
+            }
+
+            function setLanguage(lang) {
+                // Update the language display text
+                if (DOM.languageText) {
+                    DOM.languageText.textContent = lang;
+                }
+
+                // Save to localStorage
+                localStorage.setItem('selectedLanguage', lang);
+
+                // Here you would typically load language-specific content
+                // For example: loadLanguageContent(lang);
+            }
+
+            // Handle language dropdown clicks
+            DOM.dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const selectedLang = this.textContent.trim();
+                    setLanguage(selectedLang);
+                    console.log('User manually selected language:', selectedLang);
+                });
+            });
+
+            // Initialize language detection on first load
+            detectAndSetLanguage();
+
 
 let lastScrollY = 0;
 let ticking = false;
