@@ -1,4 +1,73 @@
  document.addEventListener('DOMContentLoaded', function() {
+            // API Configuration from config.js
+            const API_URL = typeof CONFIG !== 'undefined' ? CONFIG.API_URL : 'http://localhost:3000/api';
+
+            // Translation object for success messages
+            const translations = {
+                'EN': {
+                    success: 'We will get back to you within 24 hours',
+                    error: 'Something went wrong. Please try again.',
+                    emailRequired: 'Please enter a valid email address.'
+                },
+                'DE': {
+                    success: 'Wir werden uns innerhalb von 24 Stunden bei Ihnen melden',
+                    error: 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.',
+                    emailRequired: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
+                },
+                'IT': {
+                    success: 'Ti risponderemo entro 24 ore',
+                    error: 'Qualcosa è andato storto. Per favore riprova.',
+                    emailRequired: 'Inserisci un indirizzo email valido.'
+                },
+                'FR': {
+                    success: 'Nous vous répondrons dans les 24 heures',
+                    error: 'Quelque chose s\'est mal passé. Veuillez réessayer.',
+                    emailRequired: 'Veuillez entrer une adresse e-mail valide.'
+                },
+                'RS': {
+                    success: 'Мы свяжемся с вами в течение 24 часов',
+                    error: 'Что-то пошло не так. Пожалуйста, попробуйте снова.',
+                    emailRequired: 'Пожалуйста, введите действительный адрес электронной почты.'
+                },
+                'AR': {
+                    success: 'سنتواصل معك خلال 24 ساعة',
+                    error: 'حدث خطأ ما. يرجى المحاولة مرة أخرى.',
+                    emailRequired: 'يرجى إدخال عنوان بريد إلكتروني صالح.'
+                }
+            };
+
+            // Get current language
+            function getCurrentLanguage() {
+                return localStorage.getItem('selectedLanguage') || 'EN';
+            }
+
+            // Show success message with checkmark
+            function showSuccessMessage(message) {
+                const overlay = document.createElement('div');
+                overlay.className = 'success-overlay';
+                overlay.innerHTML = `
+                    <div class="success-message">
+                        <div class="success-checkmark">
+                            <svg viewBox="0 0 52 52">
+                                <circle class="success-checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                                <path class="success-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                        </div>
+                        <p class="success-text">${message}</p>
+                    </div>
+                `;
+                document.body.appendChild(overlay);
+
+                setTimeout(() => {
+                    overlay.classList.add('active');
+                }, 10);
+
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    setTimeout(() => overlay.remove(), 300);
+                }, 3000);
+            }
+
             // Cache DOM elements
             const DOM = {
                 dropdownItems: document.querySelectorAll('.dropdown-item'),
@@ -341,14 +410,33 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
 });
 
             // Newsletter button
-            DOM.newsletterBtn?.addEventListener('click', function(e) {
+            DOM.newsletterBtn?.addEventListener('click', async function(e) {
                 e.preventDefault();
-                const email = document.querySelector('.newsletter-input').value;
-                if (email) {
-                    alert('Thank you for subscribing! You will receive updates about exclusive releases.');
-                    document.querySelector('.newsletter-input').value = '';
-                } else {
-                    alert('Please enter a valid email address.');
+                const emailInput = document.querySelector('.newsletter-input');
+                const email = emailInput.value;
+                const lang = getCurrentLanguage();
+
+                if (!email) {
+                    alert(translations[lang].emailRequired);
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_URL}/newsletter`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+
+                    if (response.ok) {
+                        showSuccessMessage(translations[lang].success);
+                        emailInput.value = '';
+                    } else {
+                        alert(translations[lang].error);
+                    }
+                } catch (error) {
+                    console.error('Newsletter error:', error);
+                    alert(translations[lang].error);
                 }
             });
 
@@ -367,35 +455,88 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
             // Form submissions
             const reservationForm = document.querySelector('.reservation-form');
             if (reservationForm) {
-                reservationForm.addEventListener('submit', function(e) {
+                reservationForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
-                    console.log('Reservation data:', Object.fromEntries(new FormData(this)));
-                    alert('Thank you! Your reservation request has been submitted. We will contact you within 24 hours.');
-                    this.reset();
-                    restoreWebsite();
+                    const lang = getCurrentLanguage();
+                    const formData = Object.fromEntries(new FormData(this));
+
+                    try {
+                        const response = await fetch(`${API_URL}/reservation`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+
+                        if (response.ok) {
+                            showSuccessMessage(translations[lang].success);
+                            this.reset();
+                            setTimeout(() => restoreWebsite(), 1500);
+                        } else {
+                            alert(translations[lang].error);
+                        }
+                    } catch (error) {
+                        console.error('Reservation error:', error);
+                        alert(translations[lang].error);
+                    }
                 });
             }
 
             const brochureForm = document.querySelector('.brochure-form');
             if (brochureForm) {
-                brochureForm.addEventListener('submit', function(e) {
+                brochureForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
-                    const email = document.getElementById('brochure-email').value;
-                    console.log('Brochure request:', Object.fromEntries(new FormData(this)));
-                    alert(`Thank you! The brochure has been sent to ${email}`);
-                    this.reset();
-                    closeBrochureSidebar();
+                    const lang = getCurrentLanguage();
+                    const formData = Object.fromEntries(new FormData(this));
+
+                    try {
+                        const response = await fetch(`${API_URL}/brochure`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+
+                        if (response.ok) {
+                            showSuccessMessage(translations[lang].success);
+                            this.reset();
+                            setTimeout(() => closeBrochureSidebar(), 1500);
+                        } else {
+                            alert(translations[lang].error);
+                        }
+                    } catch (error) {
+                        console.error('Brochure error:', error);
+                        alert(translations[lang].error);
+                    }
                 });
             }
 
             const bidForm = document.querySelector('.bid-form');
             if (bidForm) {
-                bidForm.addEventListener('submit', function(e) {
+                bidForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
-                    const offer = document.querySelector('.bid-input').value;
-                    console.log('Bid submission:', Object.fromEntries(new FormData(this)));
-                    alert(`Thank you! Your confidential offer of ${parseFloat(offer).toLocaleString()} has been submitted. We will respond within 24 hours.`);
-                    this.reset();
+                    const lang = getCurrentLanguage();
+
+                    // Extract name, email, and offer from the form inputs
+                    const name = this.querySelector('input[type="text"]').value;
+                    const email = this.querySelector('input[type="email"]').value;
+                    const offer = this.querySelector('.bid-input').value;
+
+                    try {
+                        const response = await fetch(`${API_URL}/bid`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, email, offer })
+                        });
+
+                        if (response.ok) {
+                            showSuccessMessage(translations[lang].success);
+                            this.reset();
+                        } else {
+                            alert(translations[lang].error);
+                        }
+                    } catch (error) {
+                        console.error('Bid error:', error);
+                        alert(translations[lang].error);
+                    }
                 });
             }
 
