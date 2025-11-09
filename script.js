@@ -6,31 +6,37 @@
             const translations = {
                 'EN': {
                     success: 'We will get back to you within 24 hours',
+                    newsletterSuccess: 'Thank you for subscribing! You will receive exclusive updates and offers',
                     error: 'Something went wrong. Please try again.',
                     emailRequired: 'Please enter a valid email address.'
                 },
                 'DE': {
                     success: 'Wir werden uns innerhalb von 24 Stunden bei Ihnen melden',
+                    newsletterSuccess: 'Vielen Dank für Ihr Abonnement! Sie erhalten exklusive Updates und Angebote',
                     error: 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.',
                     emailRequired: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
                 },
                 'IT': {
                     success: 'Ti risponderemo entro 24 ore',
+                    newsletterSuccess: 'Grazie per esserti iscritto! Riceverai aggiornamenti e offerte esclusive',
                     error: 'Qualcosa è andato storto. Per favore riprova.',
                     emailRequired: 'Inserisci un indirizzo email valido.'
                 },
                 'FR': {
                     success: 'Nous vous répondrons dans les 24 heures',
+                    newsletterSuccess: 'Merci de votre inscription ! Vous recevrez des mises à jour et offres exclusives',
                     error: 'Quelque chose s\'est mal passé. Veuillez réessayer.',
                     emailRequired: 'Veuillez entrer une adresse e-mail valide.'
                 },
                 'RS': {
                     success: 'Мы свяжемся с вами в течение 24 часов',
+                    newsletterSuccess: 'Спасибо за подписку! Вы будете получать эксклюзивные обновления и предложения',
                     error: 'Что-то пошло не так. Пожалуйста, попробуйте снова.',
                     emailRequired: 'Пожалуйста, введите действительный адрес электронной почты.'
                 },
                 'AR': {
                     success: 'سنتواصل معك خلال 24 ساعة',
+                    newsletterSuccess: 'شكراً للاشتراك! ستتلقى تحديثات وعروض حصرية',
                     error: 'حدث خطأ ما. يرجى المحاولة مرة أخرى.',
                     emailRequired: 'يرجى إدخال عنوان بريد إلكتروني صالح.'
                 }
@@ -415,11 +421,21 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                 const emailInput = document.querySelector('.newsletter-input');
                 const email = emailInput.value;
                 const lang = getCurrentLanguage();
+                const button = this;
 
                 if (!email) {
                     alert(translations[lang].emailRequired);
                     return;
                 }
+
+                // Prevent spam clicking
+                if (button.disabled) return;
+
+                // Disable button and show loading state
+                button.disabled = true;
+                button.classList.add('loading');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
                 try {
                     const response = await fetch(`${API_URL}/newsletter`, {
@@ -429,7 +445,7 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                     });
 
                     if (response.ok) {
-                        showSuccessMessage(translations[lang].success);
+                        showSuccessMessage(translations[lang].newsletterSuccess);
                         emailInput.value = '';
                     } else {
                         alert(translations[lang].error);
@@ -437,6 +453,13 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                 } catch (error) {
                     console.error('Newsletter error:', error);
                     alert(translations[lang].error);
+                } finally {
+                    // Re-enable button after a delay
+                    setTimeout(() => {
+                        button.disabled = false;
+                        button.classList.remove('loading');
+                        button.innerHTML = originalHTML;
+                    }, 3000);
                 }
             });
 
@@ -459,6 +482,16 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                     e.preventDefault();
                     const lang = getCurrentLanguage();
                     const formData = Object.fromEntries(new FormData(this));
+                    const submitBtn = this.querySelector('.submit-reservation-btn');
+
+                    // Prevent spam clicking
+                    if (submitBtn.disabled) return;
+
+                    // Disable button and show loading state
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('loading');
+                    const originalHTML = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
                     try {
                         const response = await fetch(`${API_URL}/reservation`, {
@@ -473,10 +506,16 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                             setTimeout(() => restoreWebsite(), 1500);
                         } else {
                             alert(translations[lang].error);
+                            submitBtn.disabled = false;
+                            submitBtn.classList.remove('loading');
+                            submitBtn.innerHTML = originalHTML;
                         }
                     } catch (error) {
                         console.error('Reservation error:', error);
                         alert(translations[lang].error);
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('loading');
+                        submitBtn.innerHTML = originalHTML;
                     }
                 });
             }
@@ -487,6 +526,16 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                     e.preventDefault();
                     const lang = getCurrentLanguage();
                     const formData = Object.fromEntries(new FormData(this));
+                    const submitBtn = this.querySelector('.download-brochure-btn');
+
+                    // Prevent spam clicking
+                    if (submitBtn.disabled) return;
+
+                    // Disable button and show loading state
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('loading');
+                    const originalHTML = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
                     try {
                         const response = await fetch(`${API_URL}/brochure`, {
@@ -501,10 +550,16 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                             setTimeout(() => closeBrochureSidebar(), 1500);
                         } else {
                             alert(translations[lang].error);
+                            submitBtn.disabled = false;
+                            submitBtn.classList.remove('loading');
+                            submitBtn.innerHTML = originalHTML;
                         }
                     } catch (error) {
                         console.error('Brochure error:', error);
                         alert(translations[lang].error);
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('loading');
+                        submitBtn.innerHTML = originalHTML;
                     }
                 });
             }
@@ -514,11 +569,21 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                 bidForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     const lang = getCurrentLanguage();
+                    const submitBtn = this.querySelector('.submit-bid-btn');
 
                     // Extract name, email, and offer from the form inputs
                     const name = this.querySelector('input[type="text"]').value;
                     const email = this.querySelector('input[type="email"]').value;
                     const offer = this.querySelector('.bid-input').value;
+
+                    // Prevent spam clicking
+                    if (submitBtn.disabled) return;
+
+                    // Disable button and show loading state
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('loading');
+                    const originalHTML = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
                     try {
                         const response = await fetch(`${API_URL}/bid`, {
@@ -530,12 +595,23 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                         if (response.ok) {
                             showSuccessMessage(translations[lang].success);
                             this.reset();
+                            setTimeout(() => {
+                                submitBtn.disabled = false;
+                                submitBtn.classList.remove('loading');
+                                submitBtn.innerHTML = originalHTML;
+                            }, 3000);
                         } else {
                             alert(translations[lang].error);
+                            submitBtn.disabled = false;
+                            submitBtn.classList.remove('loading');
+                            submitBtn.innerHTML = originalHTML;
                         }
                     } catch (error) {
                         console.error('Bid error:', error);
                         alert(translations[lang].error);
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('loading');
+                        submitBtn.innerHTML = originalHTML;
                     }
                 });
             }

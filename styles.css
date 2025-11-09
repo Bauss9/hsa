@@ -3144,3 +3144,42 @@
         font-size: 16px;
     }
 }
+
+/* Button Loading States */
+button.loading,
+button:disabled.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.newsletter-btn.loading,
+.submit-reservation-btn.loading,
+.download-brochure-btn.loading,
+.submit-bid-btn.loading {
+    background: #999 !important;
+    color: white !important;
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Ensure buttons maintain size during loading */
+button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
