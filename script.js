@@ -93,7 +93,8 @@
                 closeBtn: document.getElementById('closeBtn'),
                 brochureClose: document.getElementById('brochureClose'),
                 imageContainer: document.querySelector('.image-container'),
-                imageSection: document.querySelector('.image-section')
+                imageSection: document.querySelector('.image-section'),
+                scrollToTopBtn: document.getElementById('scrollToTop')
             };
 
             DOM.navLinks = document.querySelectorAll('.nav-link');
@@ -116,32 +117,31 @@
             };
 
             function detectAndSetLanguage() {
-                // Check if language was already set by user
-                const savedLang = localStorage.getItem('selectedLanguage');
-                if (savedLang) {
-                    // Apply saved language
-                    if (DOM.languageText) {
-                        DOM.languageText.textContent = savedLang;
-                    }
-                    return;
+                // Detect current language from URL path
+                const currentPath = window.location.pathname;
+                let currentLang = 'EN'; // Default
+
+                if (currentPath.startsWith('/ar')) {
+                    currentLang = 'AR';
+                } else if (currentPath.startsWith('/de')) {
+                    currentLang = 'DE';
+                } else if (currentPath.startsWith('/it')) {
+                    currentLang = 'IT';
+                } else if (currentPath.startsWith('/fr')) {
+                    currentLang = 'FR';
+                } else if (currentPath.startsWith('/rs')) {
+                    currentLang = 'RS';
                 }
 
-                // Get browser language
-                const userLang = navigator.language || navigator.userLanguage;
-                const langCode = userLang.split('-')[0].toLowerCase(); // 'en-US' -> 'en'
-
-                console.log('Detected browser language:', userLang, '-> Code:', langCode);
-
-                // Check if we support this language
-                const detectedLang = availableLanguages[langCode];
-
-                if (detectedLang) {
-                    setLanguage(detectedLang);
-                    console.log('Language auto-set to:', detectedLang);
-                } else {
-                    setLanguage('EN'); // Default to English
-                    console.log('Language defaulted to: EN (unsupported language:', langCode, ')');
+                // Update the language display text
+                if (DOM.languageText) {
+                    DOM.languageText.textContent = currentLang;
                 }
+
+                // Save to localStorage
+                localStorage.setItem('selectedLanguage', currentLang);
+
+                console.log('Current language set to:', currentLang);
             }
 
             function setLanguage(lang) {
@@ -157,13 +157,14 @@
                 // For example: loadLanguageContent(lang);
             }
 
-            // Handle language dropdown clicks
+            // Handle language dropdown clicks - Navigate to the URL
             DOM.dropdownItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const selectedLang = this.textContent.trim();
-                    setLanguage(selectedLang);
-                    console.log('User manually selected language:', selectedLang);
+                    const targetUrl = this.getAttribute('href');
+                    if (targetUrl) {
+                        window.location.href = targetUrl;
+                    }
                 });
             });
 
@@ -370,9 +371,11 @@ DOM.scrollToTopBtn = document.getElementById('scrollToTop');
 
 // Add this function with your other functions
 function updateScrollToTopButton() {
+    if (!DOM.scrollToTopBtn) return; // Safety check
+
     const scrollY = window.scrollY;
     const showThreshold = window.innerHeight * 0.3; // Show after 30% scroll
-    
+
     if (scrollY > showThreshold) {
         DOM.scrollToTopBtn.classList.add('visible');
     } else {
