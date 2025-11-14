@@ -632,24 +632,6 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
             document.querySelector('.booking-form')?.addEventListener('click', e => e.stopPropagation());
             document.querySelector('.brochure-content')?.addEventListener('click', e => e.stopPropagation());
 
-            // Social links functionality
-            document.querySelectorAll('.social-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const platform = this.querySelector('i').classList[1].split('-')[1];
-                    alert(`This would open ${platform.charAt(0).toUpperCase() + platform.slice(1)} page`);
-                });
-            });
-
-            // Legal links
-            document.querySelectorAll('.legal-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const page = this.textContent.toLowerCase();
-                    alert(`This would open the ${page} page`);
-                });
-            });
-
 
 // Mobile nav links
 DOM.mobileNavLinks.forEach(link => {
