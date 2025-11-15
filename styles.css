@@ -3190,3 +3190,31 @@ select,
 textarea {
     font-size: 16px !important;
 }
+
+/* Newsletter Error Message */
+.newsletter-error {
+    margin-top: 10px;
+    padding: 12px 15px;
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 4px;
+    color: #dc3545;
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.newsletter-error i {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .newsletter-error {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+}

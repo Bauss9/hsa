@@ -7,36 +7,42 @@
                 'EN': {
                     success: 'We will get back to you within 24 hours',
                     newsletterSuccess: 'Thank you for subscribing! You will receive exclusive updates and offers',
+                    newsletterAlreadySubscribed: 'This email is already subscribed',
                     error: 'Something went wrong. Please try again.',
                     emailRequired: 'Please enter a valid email address.'
                 },
                 'DE': {
                     success: 'Wir werden uns innerhalb von 24 Stunden bei Ihnen melden',
                     newsletterSuccess: 'Vielen Dank für Ihr Abonnement! Sie erhalten exklusive Updates und Angebote',
+                    newsletterAlreadySubscribed: 'Diese E-Mail ist bereits abonniert',
                     error: 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.',
                     emailRequired: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
                 },
                 'IT': {
                     success: 'Ti risponderemo entro 24 ore',
                     newsletterSuccess: 'Grazie per esserti iscritto! Riceverai aggiornamenti e offerte esclusive',
+                    newsletterAlreadySubscribed: 'Questa email è già iscritta',
                     error: 'Qualcosa è andato storto. Per favore riprova.',
                     emailRequired: 'Inserisci un indirizzo email valido.'
                 },
                 'FR': {
                     success: 'Nous vous répondrons dans les 24 heures',
                     newsletterSuccess: 'Merci de votre inscription ! Vous recevrez des mises à jour et offres exclusives',
+                    newsletterAlreadySubscribed: 'Cet e-mail est déjà abonné',
                     error: 'Quelque chose s\'est mal passé. Veuillez réessayer.',
                     emailRequired: 'Veuillez entrer une adresse e-mail valide.'
                 },
                 'RS': {
                     success: 'Мы свяжемся с вами в течение 24 часов',
                     newsletterSuccess: 'Спасибо за подписку! Вы будете получать эксклюзивные обновления и предложения',
+                    newsletterAlreadySubscribed: 'Этот адрес электронной почты уже подписан',
                     error: 'Что-то пошло не так. Пожалуйста, попробуйте снова.',
                     emailRequired: 'Пожалуйста, введите действительный адрес электронной почты.'
                 },
                 'AR': {
                     success: 'سنتواصل معك خلال 24 ساعة',
                     newsletterSuccess: 'شكراً للاشتراك! ستتلقى تحديثات وعروض حصرية',
+                    newsletterAlreadySubscribed: 'هذا البريد الإلكتروني مشترك بالفعل',
                     error: 'حدث خطأ ما. يرجى المحاولة مرة أخرى.',
                     emailRequired: 'يرجى إدخال عنوان بريد إلكتروني صالح.'
                 }
@@ -418,6 +424,40 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
     });
 });
 
+            // Helper function to show newsletter error message
+            function showNewsletterError(message) {
+                const newsletterForm = document.querySelector('.newsletter-form');
+
+                // Remove any existing error message
+                const existingError = newsletterForm?.querySelector('.newsletter-error');
+                if (existingError) {
+                    existingError.remove();
+                }
+
+                // Create and add new error message
+                if (newsletterForm) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'newsletter-error';
+                    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+                    newsletterForm.appendChild(errorDiv);
+
+                    // Auto-remove after 5 seconds
+                    setTimeout(() => {
+                        errorDiv.style.opacity = '0';
+                        setTimeout(() => errorDiv.remove(), 300);
+                    }, 5000);
+                }
+            }
+
+            // Helper function to remove newsletter error
+            function removeNewsletterError() {
+                const existingError = document.querySelector('.newsletter-error');
+                if (existingError) {
+                    existingError.style.opacity = '0';
+                    setTimeout(() => existingError.remove(), 300);
+                }
+            }
+
             // Newsletter button
             DOM.newsletterBtn?.addEventListener('click', async function(e) {
                 e.preventDefault();
@@ -426,8 +466,11 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                 const lang = getCurrentLanguage();
                 const button = this;
 
+                // Remove any existing error messages
+                removeNewsletterError();
+
                 if (!email) {
-                    alert(translations[lang].emailRequired);
+                    showNewsletterError(translations[lang].emailRequired);
                     return;
                 }
 
@@ -447,15 +490,21 @@ DOM.scrollToTopBtn?.addEventListener('click', function() {
                         body: JSON.stringify({ email })
                     });
 
+                    const data = await response.json();
+
                     if (response.ok) {
                         showSuccessMessage(translations[lang].newsletterSuccess);
                         emailInput.value = '';
+                        removeNewsletterError();
+                    } else if (response.status === 409 && data.code === 'ALREADY_SUBSCRIBED') {
+                        // Email already subscribed
+                        showNewsletterError(translations[lang].newsletterAlreadySubscribed);
                     } else {
-                        alert(translations[lang].error);
+                        showNewsletterError(translations[lang].error);
                     }
                 } catch (error) {
                     console.error('Newsletter error:', error);
-                    alert(translations[lang].error);
+                    showNewsletterError(translations[lang].error);
                 } finally {
                     // Re-enable button after a delay
                     setTimeout(() => {

@@ -1,0 +1,7 @@
+sudo -u postgres psql -c "CREATE DATABASE beachwalkgrand;"
+sudo -u postgres psql -c "CREATE USER gagovv WITH PASSWORD '075410208123Kk';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE beachwalkgrand TO gagovv;"
+sudo -u postgres psql -d beachwalkgrand -c "CREATE TABLE newsletter_subscribers (id SERIAL PRIMARY KEY, email VARCHAR(255) UNIQUE NOT NULL, subscribed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);"
+sudo -u postgres psql -d beachwalkgrand -c "CREATE INDEX idx_newsletter_email ON newsletter_subscribers(email);"
+sudo -u postgres psql -d beachwalkgrand -c "GRANT ALL PRIVILEGES ON TABLE newsletter_subscribers TO gagovv;"
+sudo -u postgres psql -d beachwalkgrand -c "GRANT USAGE, SELECT ON SEQUENCE newsletter_subscribers_id_seq TO gagovv;"
